@@ -26,7 +26,7 @@ el número ingresado. Mostrar la cantidad de divisores encontrados.
 número ingresado. Informar cuántos números primos se encontraron.
 """
 # # 1. Mostrar los números ascendentes desde el 1 al 10
-print("Numeros ascendetes")
+print("Numeros ascendentes")
 for i in range(0, 11):
     print(f"{i}")
 

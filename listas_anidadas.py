@@ -11,7 +11,7 @@ stock = [
     [[],[],["Fideos", 4,[2, 3]],[],[]],
     [[],[],[],["Leche", 6,[3, 4]],[]]
 ]
-# corcehte violeta = fila, corchete azul = columna
+# corchete violeta = fila, corchete azul = columna
 
 
 def menu_almacenes():
@@ -43,6 +43,8 @@ while seguir == "s":
         seguir = "n"
     else:
         print("Numero ingresado incorrecto")   
+
+
 # Punto 2
 stock = [["to12", 65], ["to30", 68], ["to16", 86], ["to35", 73],
         ["to20", 65], ["to40", 85], ["to25", 45], ["to45", 89],

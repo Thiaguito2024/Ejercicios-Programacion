@@ -11,15 +11,15 @@ def ingreso_nombre_secuencial(lista_vacia: list)->list:
     """ 
     Pide 10 nombres y los acomoda en la lista de forma secuencial 
     """
-    lista_nombre = []
+    lista_vacia = []
     nombres_ing = 0
     
     while nombres_ing < 10:
         nombre = input("Ingrese un nombre: ")
-        lista_nombre.append(nombre)
+        lista_vacia.append(nombre)
         nombres_ing += 1
 
-    return lista_nombre
+    return lista_vacia
 
 lista = []
 lista = ingreso_nombre_secuencial(lista)
