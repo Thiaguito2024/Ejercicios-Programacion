@@ -136,38 +136,6 @@ def fibonacci(num:int)->int:
     else:
         return fibonacci(num-1) + fibonacci(num-2)
 
-def swap(lista,i,j):
-    """
-    Hace el swap de la lista pasada por parametros 
-    """
-    aux = lista[i]
-    lista[i] = lista[j]
-    lista[j] = aux
-    
-def ordenamiento_ascendente(lista:list):
-    """
-    Ordena la lista pasada por parametro de forma ascendente
-    """
-    for i in range(len(lista)-1):
-        for j in range(i+1, len(lista)):
-            if (lista[i] > lista[j]):
-                swap(lista,i,j)
-            if lista[i][1] == lista[j][1]:
-                if lista[i][0] > lista[j][0]:
-                    swap(lista,i,j)
-            
-def ordenamiento_descendente(lista:list):
-    """
-    Ordena la lista pasada por parametro de forma descendente
-    """
-    for i in range(len(lista)-1):
-        for j in range(i+1, len(lista)):
-            if (lista[i] < lista[j]):
-                swap(lista,i,j)
-            if lista[i][1] == lista[j][1]:
-                if lista[i][0] < lista[j][0]:
-                    swap(lista,i,j)
-
 def alta_productos(lista)->list:
     """
     Suma un producto a la lista pasada por parametro
@@ -227,7 +195,8 @@ def modificar_producto(lista):
         cantidad = int(input("Ingrese la cantidad de producto a agregar(1-100): "))
     producto = [producto, cantidad, [fila-1 , columna-1]]
     lista[fila-1][columna-1] = producto
-    print(lista)
+    for i in range(len(lista)):
+        print(lista[i])
 
 def listar_productos(lista):
     """
@@ -245,7 +214,8 @@ def lista_ordenado(lista):
         ordenamiento_ascendente(lista)
     else:
         ordenamiento_descendente(lista)
-    print(lista)
+    for i in range(len(lista)):
+        print(lista[i])
     
 def reponer(lista:list):
     """
@@ -264,3 +234,78 @@ def reponer(lista:list):
     lista[fila][1] += cantidad
     for i in range(len(lista)):
         print(lista[i])
+
+def swap(lista,i,j):
+    """
+    Hace el swap de la lista pasada por parametros 
+    """
+    aux = lista[i]
+    lista[i] = lista[j]
+    lista[j] = aux
+    return lista
+    
+def ordenamiento_ascendente(lista:list):
+    """
+    Ordena la lista pasada por parametro de forma ascendente
+    """
+    for i in range(len(lista)-1):
+        for j in range(i+1, len(lista)):
+            if (lista[i] > lista[j]):
+                swap(lista,i,j)
+            if lista[i][1] == lista[j][1]:
+                if lista[i][0] > lista[j][0]:
+                    swap(lista,i,j)
+
+def ordenamiento_ascendente_mixto_por_2_listas(lista:list, lista2:list):
+    """
+    Ordena la lista pasada por parametro de forma ascendente pero el segundo criterio lo hace
+    de forma descendente
+    """
+    for i in range(len(lista)-1):
+        for j in range(i+1, len(lista)):
+            if (lista[i] > lista[j]):
+                swap(lista,i,j)
+                swap(lista2, i,j)
+            elif lista[i] == lista[j]:
+                    if lista2[i] < lista2[j]:
+                        swap(lista2, i,j)
+                        swap(lista, i,j)
+    
+    for i in range(len(lista)):
+        print(lista[i], lista2[i])
+        
+def ordenamiento_por_3_listas(lista:list, lista2:list, lista3:list):
+    """
+    Realiza el ordenamiento de manera ascendente, siempre y cuando no llegue a la ultima condicion
+    """
+    for i in range(len(lista)-1):
+        for j in range(i+1, len(lista)):
+            if (lista[i] > lista[j]):
+                swap(lista,i,j)
+                swap(lista2, i,j)
+                swap(lista3, i, j)
+            elif lista[i] == lista[j]:
+                if lista2[i] > lista2[j]:
+                    swap(lista, i,j)
+                    swap(lista2, i,j)
+                    swap(lista3, i, j)
+            else:
+                if lista3[i] < lista3[j]:
+                    swap(lista, i,j)
+                    swap(lista2, i,j)
+                    swap(lista3, i, j)
+    
+    for i in range(len(lista)):
+        print(lista[i], lista2[i], lista3[i])
+
+def ordenamiento_descendente(lista:list):
+    """
+    Ordena la lista pasada por parametro de forma descendente
+    """
+    for i in range(len(lista)-1):
+        for j in range(i+1, len(lista)):
+            if (lista[i] < lista[j]):
+                swap(lista,i,j)
+            if lista[i][1] == lista[j][1]:
+                if lista[i][0] < lista[j][0]:
+                    swap(lista,i,j)
