@@ -1,6 +1,6 @@
 def get_int(mensaje: str, mensaje_error: str, minimo: int, maximo: int, reintentos: int) -> int|None:
     """ 
-    Pide numeros enteros por consola
+    Pide numeros enteros por consola y si lo ingresa mal se le resta a los intentos
     """ 
     while reintentos > 0:
         num = int(input(f"{mensaje}"))
