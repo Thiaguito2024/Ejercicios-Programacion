@@ -235,7 +235,7 @@ def reponer(lista:list):
     for i in range(len(lista)):
         print(lista[i])
 
-def swap(lista,i,j):
+def swap(lista,i,j)->list:
     """
     Hace el swap de la lista pasada por parametros 
     """
@@ -309,3 +309,13 @@ def ordenamiento_descendente(lista:list):
             if lista[i][1] == lista[j][1]:
                 if lista[i][0] < lista[j][0]:
                     swap(lista,i,j)
+
+def buscar_numero(lista:list, num_ing:int)->int: 
+    """
+    Se el pasa or parametro y lo busca en la lista
+    """
+    cont = 0
+    for i in range(len(lista)):
+        if lista[i] == num_ing:
+            cont += 1
+    return cont
