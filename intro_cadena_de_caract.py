@@ -40,6 +40,9 @@ Ejercicio 3: Desarrollar una función “char_at” que recibe una cadena y un n
 Se debe retornar el caracter en la posición indicada por el número si ésta es válida.
 """
 def char_at(cadena:str, indice:int)->str:
+    """
+    Retorna el caracter que esta en la posicion que ingreso el usuario, si es valida la posicion
+    """
     while indice < 0 or indice > len(cadena):
         print("Indice invalido")
         indice = int(input("Reingrese un indice: "))
@@ -50,3 +53,62 @@ msj = "hola mundo"
 indice = int(input("Ingrese un indice: "))
 cadena = char_at(msj, indice)
 print(cadena)
+
+"""
+Ejercicio 4: Crear una función que reciba como parámetro una cadena y determine la
+cantidad de vocales que hay de cada una (individualmente). La función
+retornará una matriz indicando en la columna 1 cada vocal, y en la columna 2
+la cantidad.
+"""
+# def cuenta_vocales(cadena:str, letra_ingresada:str)->list:
+#     vocales = []
+#     if letra_ingresada in cadena:
+#         vocales.append(letra_ingresada)
+#     return vocales
+
+# cadena = "murcielaguito"
+# letra = input("Ingrese una letra para buscar en el texto: ")
+# vocales = cuenta_vocales(cadena, letra)
+# print(vocales)
+def cuenta_vocales(cadena:str)->list:
+    vocales = []
+    cont_vocales_a = 0
+    cont_vocales_e = 0
+    cont_vocales_i = 0
+    cont_vocales_o = 0
+    cont_vocales_u = 0
+    for i in range(len(cadena)):   
+        if cadena[i] == "a":    
+            cont_vocales_a += 1
+            if cont_vocales_a != 0:
+                cont_vocales_a += 1
+                vocal = [cont_vocales_a]
+                vocales.append(vocal)
+            vocal = [cadena[i], cont_vocales_a]
+            vocales.append(vocal)
+        elif cadena[i] == "e":
+            cont_vocales_e += 1
+            vocal = [cadena[i], cont_vocales_e]   
+            vocales.append(vocal)    
+        elif cadena[i] == "i": 
+            cont_vocales_i += 1
+            vocal = [cadena[i], cont_vocales_i]
+            vocales.append(vocal)
+        elif cadena[i] == "o":
+            cont_vocales_o += 1
+            vocal = [cadena[i], cont_vocales_o]
+            vocales.append(vocal)
+        elif cadena[i] == "u":
+            cont_vocales_u += 1
+            if cont_vocales_a != 0:
+                cont_vocales_a += 1
+                vocal = [cont_vocales_a]
+                vocales.append(vocal)
+            vocal = [cadena[i], cont_vocales_u]
+            vocales.append(vocal)
+    return vocales
+
+cadena = "murcielaguito"
+#letra = input("Ingrese una letra para buscar en el texto: ")
+vocales = cuenta_vocales(cadena)
+print(vocales)
