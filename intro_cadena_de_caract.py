@@ -5,8 +5,8 @@ Debe retornar las veces que la letra está incluida en el texto.
 def cuenta_letras(letra:str, cadena:str):
     cont = 0
     while letra not in cadena: 
-      letra = input("Reingrese una letra para buscar en el texto: ")
-      
+        letra = input("Reingrese una letra para buscar en el texto: ")
+    
     for i in cadena:
         if i == letra:
             cont += 1
