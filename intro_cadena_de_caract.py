@@ -60,16 +60,6 @@ cantidad de vocales que hay de cada una (individualmente). La función
 retornará una matriz indicando en la columna 1 cada vocal, y en la columna 2
 la cantidad.
 """
-# def cuenta_vocales(cadena:str, letra_ingresada:str)->list:
-#     vocales = []
-#     if letra_ingresada in cadena:
-#         vocales.append(letra_ingresada)
-#     return vocales
-
-# cadena = "murcielaguito"
-# letra = input("Ingrese una letra para buscar en el texto: ")
-# vocales = cuenta_vocales(cadena, letra)
-# print(vocales)
 def cuenta_vocales(cadena:str)->list:
     vocales = []
     cont_vocales_a = 0
@@ -109,6 +99,5 @@ def cuenta_vocales(cadena:str)->list:
     return vocales
 
 cadena = "murcielaguito"
-#letra = input("Ingrese una letra para buscar en el texto: ")
 vocales = cuenta_vocales(cadena)
 print(vocales)
