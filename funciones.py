@@ -237,7 +237,7 @@ def reponer(lista:list):
 
 def swap(lista,i,j)->list:
     """
-    Hace el swap de la lista pasada por parametros 
+    Hace el swap de la lista pasada por parametros, espera la lista, la posicion i y la poscion j
     """
     aux = lista[i]
     lista[i] = lista[j]
@@ -319,3 +319,61 @@ def buscar_numero(lista:list, num_ing:int)->int:
         if lista[i] == num_ing:
             cont += 1
     return cont
+
+def invertir_cadena(cadena:str) -> str:
+    """
+    Invierte la cadena pasada por parametro
+    """
+    length = len(cadena)
+    aux = ""
+    for i in range(length):
+        aux += cadena[length - i - 1] 
+    return aux
+
+def contar_palabras(cadena:str) -> int:
+    """
+    Cuenta las palabras de la cadena pasada por parametro
+    """
+    palabras = cadena.split()
+    return len(palabras)
+
+def reemplaza_palabras(cadena:str, palabra_a_reemplazar:str, palabra:str):
+    """
+    Reemplaza una palabra que el usuario quiera de la cadena pasada por parametro
+    """
+    return cadena.replace(palabra_a_reemplazar, palabra) 
+
+def mayusculas(cadena:str):
+    """
+    Pasa a mayuscula la primer letra de la cadena pasada por parametro
+    """
+    return cadena.capitalize()
+
+def palindromo(cadena:str) -> bool:
+    """
+    Verifica que la cadena pasada por parametro sea un palidromo, que se igual de izquierda a derecha
+    que de derecha a izquierda
+    """
+    palindromo = False
+    
+    if cadena == cadena[::-1]:
+        palindromo = True
+    
+    return palindromo
+
+def ordenado(cadena:str, numero:int)-> list:
+    """
+    Ordena la cadena pasada por parametro de mayor a menor o menor a mayor 
+    segun lo quiera el usuario
+    """
+    lista_cadena = []
+    for letra in range(len(cadena)):
+        lista_cadena.append(cadena[letra])
+    
+    for i in range(len(lista_cadena)-1):
+        for j in range(i+1,len(lista_cadena)):
+            if numero == 1 and lista_cadena[i] > lista_cadena[j]:
+                swap(lista_cadena,i,j)
+            elif numero == -1 and lista_cadena[i] < lista_cadena[j]:
+                swap(lista_cadena,i,j)
+    return lista_cadena
