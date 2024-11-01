@@ -242,8 +242,8 @@ def swap(lista,i,j)->list:
     aux = lista[i]
     lista[i] = lista[j]
     lista[j] = aux
-    return lista
-    
+
+
 def ordenamiento_ascendente(lista:list):
     """
     Ordena la lista pasada por parametro de forma ascendente
