@@ -33,7 +33,7 @@ def min_max(minimo:int, maximo:int)->int:
     
     return numero
 
-def mostrar(numero:int, minimo:int, maximo:int)-> int: 
+def mostrar_numero(numero:int, minimo:int, maximo:int)-> int: 
     """
     ingresa numero y lo retorna 
     """
@@ -41,7 +41,7 @@ def mostrar(numero:int, minimo:int, maximo:int)-> int:
         numero = int(input(f"RE Ingrese un numero({min}/{max}): "))
     print("El numero ingresado por el usuario es: ", numero)
 
-def resta_numero_por_pf(num1:int, num2:int) -> int:
+def resta_numero(num1:int, num2:int) -> int:
     """
     resta numero ingresados por parametros formales
     """
@@ -204,23 +204,10 @@ def listar_productos(lista):
     """
     for i in range(len(lista)):
         print(lista[i])
-
-def lista_ordenado(lista):
-    """
-    Ordena la lista pasada por parametro
-    """
-    ordenamiento = input("Ordenar de manera ascendente o descendente: ")
-    if ordenamiento == "ascendente":
-        ordenamiento_ascendente(lista)
-    else:
-        ordenamiento_descendente(lista)
-    for i in range(len(lista)):
-        print(lista[i])
     
 def reponer(lista:list):
     """
     Suma la cantidad al producto que se desea reponer
-
     """
     cantidad = int(input("Ingrese la cantidad de producto que desea reponer: "))
     
@@ -235,6 +222,19 @@ def reponer(lista:list):
     for i in range(len(lista)):
         print(lista[i])
 
+def maximo_minimo(lista:list, accion:str)->int:
+    """
+    Obtiene maximo o minimo segun lo requiera el usuario y lo devuelve
+    """
+    min_max = lista[0]
+    for i in range(len(lista)):
+        if accion == "Maximo" and lista[i] > min_max:
+            min_max = lista[i]
+        elif accion == "Minimo" and lista[i] < min_max:
+            min_max = lista[i]
+    return min_max
+
+
 def swap(lista,i,j)->list:
     """
     Hace el swap de la lista pasada por parametros, espera la lista, la posicion i y la poscion j
@@ -243,72 +243,53 @@ def swap(lista,i,j)->list:
     lista[i] = lista[j]
     lista[j] = aux
 
+def ordenamiento_con_1_lista(lista:list, lista2:list, orden:int):
+    """
+    Realiza el ordenamiento de la lista pasada por parametro 
+    """
+    for i in range(len(lista)-1):
+        for j in range(i+1, len(lista)):
+            if orden == 1 and lista[i] > lista[j]:
+                swap(lista,i,j)
+            elif orden == -1 and lista[i] < lista[j]:
+                swap(lista,i,j)
 
-def ordenamiento_ascendente(lista:list):
+def ordenamiento_con_2_listas(lista:list, lista2:list, orden:int):
     """
-    Ordena la lista pasada por parametro de forma ascendente
+    Realiza el ordenamiento de las listas pasada por parametro 
     """
     for i in range(len(lista)-1):
         for j in range(i+1, len(lista)):
-            if (lista[i] > lista[j]):
+            if orden == 1 and lista[i] > lista[j]:
                 swap(lista,i,j)
-            if lista[i][1] == lista[j][1]:
-                if lista[i][0] > lista[j][0]:
-                    swap(lista,i,j)
+                swap(lista2,i,j)
+            elif orden == -1 and lista[i] < lista[j]:
+                swap(lista,i,j)
+                swap(lista2,i,j) 
 
-def ordenamiento_ascendente_mixto_por_2_listas(lista:list, lista2:list):
+def ordenamiento_con_3_listas(lista:list, lista2:list, lista3:list, orden:int):
     """
-    Ordena la lista pasada por parametro de forma ascendente pero el segundo criterio lo hace
-    de forma descendente
-    """
-    for i in range(len(lista)-1):
-        for j in range(i+1, len(lista)):
-            if (lista[i] > lista[j]):
-                swap(lista,i,j)
-                swap(lista2, i,j)
-            elif lista[i] == lista[j]:
-                    if lista2[i] < lista2[j]:
-                        swap(lista2, i,j)
-                        swap(lista, i,j)
-    
-    for i in range(len(lista)):
-        print(lista[i], lista2[i])
-        
-def ordenamiento_por_3_listas(lista:list, lista2:list, lista3:list):
-    """
-    Realiza el ordenamiento de manera ascendente, siempre y cuando no llegue a la ultima condicion
+    Realiza el ordenamiento de las listas pasada por parametro 
     """
     for i in range(len(lista)-1):
         for j in range(i+1, len(lista)):
-            if (lista[i] > lista[j]):
+            if orden == 1 and lista[i] > lista[j]:
                 swap(lista,i,j)
-                swap(lista2, i,j)
-                swap(lista3, i, j)
-            elif lista[i] == lista[j]:
-                if lista2[i] > lista2[j]:
-                    swap(lista, i,j)
-                    swap(lista2, i,j)
-                    swap(lista3, i, j)
-            else:
-                if lista3[i] < lista3[j]:
-                    swap(lista, i,j)
-                    swap(lista2, i,j)
-                    swap(lista3, i, j)
-    
-    for i in range(len(lista)):
-        print(lista[i], lista2[i], lista3[i])
+                swap(lista2,i,j)
+                swap(lista3,i,j)
+            elif orden == -1 and lista[i] < lista[j]:
+                swap(lista,i,j)
+                swap(lista2,i,j) 
+                swap(lista3,i,j)
 
-def ordenamiento_descendente(lista:list):
-    """
-    Ordena la lista pasada por parametro de forma descendente
-    """
+def ordenamiento_diccionarios(lista:list, clave:str, orden:int):
     for i in range(len(lista)-1):
         for j in range(i+1, len(lista)):
-            if (lista[i] < lista[j]):
+            if orden == 1 and lista[i][clave] > lista[j][clave]:
                 swap(lista,i,j)
-            if lista[i][1] == lista[j][1]:
-                if lista[i][0] < lista[j][0]:
-                    swap(lista,i,j)
+            elif orden == -1 and lista[i][clave] < lista[j][clave]:
+                swap(lista,i,j) 
+
 
 def buscar_numero(lista:list, num_ing:int)->int: 
     """
