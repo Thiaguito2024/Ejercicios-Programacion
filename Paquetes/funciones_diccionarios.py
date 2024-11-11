@@ -42,7 +42,7 @@ def ordenamiento(estudiantes)->str:
         mensaje = f"Legajo: {estudiantes[e]['legajo']}, Nombre: {estudiantes[e]['nombre']}, Apellido: {estudiantes[e]['apellido']}, Edad: {estudiantes[e]['edad']}"
         mostrar(mensaje)
 
-#2 a 5 
+#2 
 def calcular_promedios(estudiantes) -> None:
     acumulador = 0
     contador_notas = 0
