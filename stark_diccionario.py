@@ -1,23 +1,24 @@
-from Paquetes.funciones_stark import *
+from Paquetes.funciones_diccionarios  import *
+from estudiantes import*
 
 seguir = "si"
 ######################################## REHACER TODOS LOS PUNTOS CON UN FILTER #################################################33
 while seguir == "si":
     opciones = menu()
     if opciones == 1:
-        ordenamiento_diccionarios(lista_personajes, "nombre", 1)
+        ordenamiento(estudiantes)
     elif opciones == 2:
-        maximo_minimo_diccionario(lista_personajes, "fuerza", "Minimo") 
+        calcular_promedios(estudiantes)
     elif opciones == 3:
-        listar_cant_color_ojos(lista_personajes)
+        programa(estudiantes)
     elif opciones == 4:
-        listar_cant_color_pelo(lista_personajes)
+        calcular_mayor_promedio(estudiantes)
     elif opciones == 5:
-        listar_tipo_inteligencia(lista_personajes)
+        promedio_edad(estudiantes)
     elif opciones == 6:
-        pass
+        obtener_grupo(estudiantes)
     elif opciones == 7:
-        pass
+        listar_alumnos_mas_jovenes(estudiantes)
     elif opciones == 8:
         seguir = "no"
     else:
