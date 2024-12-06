@@ -1,5 +1,5 @@
 import random
-from b import *
+
 def generar_matriz(lista:list, cant_columnas:int):
     """
     Genera una matriz con la lista y cantidad de columnas pasadas por el usuario
@@ -19,7 +19,7 @@ def pedir_fila(min:int, max:int)->int:
         fila = input("Re-ingrese una fila: ")
     fila = int(fila)    
     while fila < min or fila > max:
-        fila = int(input(f"Ingrese una fila(entre {min} y {max}): "))
+        fila = int(input(f"Re-ingrese una fila(entre {min} y {max}): "))
     return fila
 
 def pedir_columna(min:int, max:int)-> int: 
@@ -31,7 +31,7 @@ def pedir_columna(min:int, max:int)-> int:
         columna = input("Re-ingrese una columna: ")
     columna = int(columna)
     while columna < min or columna > max:
-        columna = int(input(f"Ingrese una columna(entre {min} y {max}): "))
+        columna = int(input(f"Re-ingrese una columna(entre {min} y {max}): "))
     return columna
 
 def mostrar(nombre:str, puntos:int):
@@ -65,16 +65,25 @@ def generar_csv(nombre_archivo:str, lista:list):
     Recibe una lista y genera un archivo csv con los datos de la lista
     """
     nombre_archivo += ".csv"
-    with open(nombre_archivo, "a") as archivo: 
-        for e_tema in lista:
-            archivo.write(f"{e_tema}\n")
-
+    try:
+        with open(nombre_archivo, "a") as archivo: 
+            for e_tema in lista:
+                archivo.write(f"{e_tema}\n")
+                
+    except FileNotFoundError:
+        with open(nombre_archivo, "w") as archivo: 
+            for e_tema in lista:
+                archivo.write(f"{e_tema}\n")
+                
 def recorrer_lista(lista:list, puntos:list):
     """
     Recorre la lista pasada por parametro
     """
+    primera_vez = True
     for i in range(len(lista)):
-        if lista[i] == lista[0]:
+        if primera_vez:
+            primera_vez = False
+        elif lista[i] == lista[0]:
             lista[1] += puntos
 
 def chequear_posiciones(matriz:list, clave:str, fila:int, columna:int):
@@ -83,25 +92,20 @@ def chequear_posiciones(matriz:list, clave:str, fila:int, columna:int):
     tres unos, tres dos o tres tres 
     """
     puntos = 0
-    separador = ", "
     lista = []
+    separador = ", "
     
     contador_arriba = recorrer_lista_diccionarios(matriz, clave, fila, columna,1)    
     contador_abajo = recorrer_lista_diccionarios(matriz, clave, fila, columna, -1)    
     
     if (contador_abajo + contador_arriba) >= 3:
         puntos += 10    
-    # if fila == len(matriz) -1:
-    #     puntos = recorrer_lista_diccionarios(matriz, clave, fila, columna,-1)
-    # else:
-    #     puntos = recorrer_lista_diccionarios(matriz, clave, fila, columna)
 
     nombre = input("Ingrese su nombre: ").capitalize()
-    mostrar(nombre, puntos)
-
-    # puntaje = separador.join([nombre, str(puntos)])
-    lista.append(nombre)
-    lista.append(puntos)
-    recorrer_lista(lista, puntos) 
     
+    puntaje = separador.join([nombre, str(puntos)])
+    lista.append(puntaje)
+    
+    recorrer_lista(lista, puntos) 
+    mostrar(nombre, puntos)
     generar_csv("Lista_jugadores", lista) 
