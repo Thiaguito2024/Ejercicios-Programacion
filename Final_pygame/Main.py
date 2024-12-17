@@ -12,14 +12,17 @@ pygame.display.set_caption("Candy Crush")
 icono = pygame.image.load("Candy_icono.png")
 pygame.display.set_icon(icono)
 
-imagen_fondo = pygame.image.load("Fondo_Candy.jpg")
+# Imagenes
+imagen_fondo = pygame.image.load("fondo_candy_3.png")
 imagen_fondo = pygame.transform.scale(imagen_fondo, (800,600))
+imagen_play = pygame.image.load("Fondo_Candy.jpg")
+
 # CONSTANTES
 lista_jugadores = []
 fuente = pygame.font.SysFont(None, 36)
 play_rect = pygame.Rect(300,300,300,75)
 input_rect = pygame.Rect(300,400,400,75)
-scoreboard_rect = pygame.Rect(10,100,250,400)
+scoreboard_rect = pygame.Rect(0,200,250,400)
 scoreboard_inactivo = colores.RED1
 scoreboard_activo = colores.GREEN1
 color_input = scoreboard_inactivo
@@ -35,7 +38,7 @@ while running:
     for evento in lista_eventos:
         if evento.type == pygame.QUIT:
             running = False
-        
+
         if evento.type == pygame.MOUSEBUTTONDOWN:
             if input_rect.collidepoint(evento.pos):
                 active = True
@@ -45,6 +48,7 @@ while running:
                     primer_input = False
 
             if play_rect.collidepoint(evento.pos) and active:
+                pantalla.blit(imagen_play, (0,0))
                 puntos = juego_principal(pantalla)
 
         if evento.type == pygame.KEYDOWN and active:
@@ -56,16 +60,16 @@ while running:
                 lista_jugadores.append(puntos)
             else: # Si presiona cualquier otra letra, se agrega a la cadena 
                 nombre += evento.unicode 
-
+    
     # Dibujo en la pantalla
-    pantalla.fill(colores.LIGHTBLUE)
+    pantalla.blit(imagen_fondo,(0,0))
     color_input = scoreboard_activo if active else scoreboard_inactivo
     pygame.draw.rect(pantalla, color_input, input_rect) 
     pygame.draw.rect(pantalla, colores.WHEAT, play_rect)
-    pygame.draw.rect(pantalla, colores.BLACK, scoreboard_rect)
+    pygame.draw.rect(pantalla, colores.PINK, scoreboard_rect)
 
     # Botones
-    scoreboard_texto = fuente.render("SCOREBOARD", True, colores.RED1) # Titulo de Scoreboard
+    scoreboard_texto = fuente.render("SCOREBOARD", True, colores.WHITE) # Titulo de Scoreboard
     play_texto = fuente.render("Jugar",True, colores.GREEN) # Boton jugar
     texto_renderizado = fuente.render(nombre, True, colores.BLACK) # Input
 
@@ -75,12 +79,14 @@ while running:
     pantalla.blit(scoreboard_texto, (scoreboard_rect.x + 15, scoreboard_rect.y + 15))
 
     # Scoreboard
-    generar_csv("Scoreboard", lista_jugadores)
     espacio = 30
     for persona in lista_jugadores:
-        pantalla.blit(fuente.render(f"{persona}", True, colores.GREEN),(scoreboard_rect.x +15, scoreboard_rect.y+espacio+15)) # Bliteo nombre y puntos
-        espacio += 20 
+        pantalla.blit(fuente.render(f"{persona}", True, colores.WHITE),(scoreboard_rect.x +15, scoreboard_rect.y+espacio+15)) # Bliteo nombre y puntos
+        espacio += 30 
 
     pygame.display.flip()
+generar_csv("Scoreboard", lista_jugadores)
 print(lista_jugadores)
 pygame.quit()
+
+# AGREGAR QUE EL USUARIO PUEDA MANTENER PRESIONADO EL BOTON DE BORRAR

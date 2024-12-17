@@ -17,15 +17,20 @@ def generar_csv(nombre_archivo: str, lista: list):
     separados por comas en una sola línea, sin usar map.
     """
     nombre_archivo += ".csv"
-    
+    # puntaje_anterior = []
     contenido = ", ".join(str(elemento) for elemento in lista)
     
     try:
-        with open(nombre_archivo, "r+") as archivo:
+        with open(nombre_archivo, "a") as archivo:
             archivo.write(contenido + "\n")
+            # puntaje_anterior.append(archivo.readlines())
+
     except FileNotFoundError:
         with open(nombre_archivo, "w") as archivo:
             archivo.write(contenido + "\n")
+            # puntaje_anterior.append(archivo.readlines())
+
+    # return puntaje_anterior
 
 def verificar_combinacion(grilla, fila, columna, clave):
     """
@@ -87,37 +92,34 @@ def juego_principal(pantalla):
             
             if evento.type == pygame.MOUSEBUTTONDOWN:
                 print("click", evento.pos)
-                coordenada_x = int(round(evento.pos[0] / 100,0)-1)
-                coordenada_y = int(round((evento.pos[1]-100) / 100,0)-1)
+                coordenada_x = (evento.pos[0] - 50) // 100  # Restamos margen izquierdo
+                coordenada_y = (evento.pos[1] - 150) // 100  # Restamos margen superior
                 print("x", coordenada_x, "y", coordenada_y)
+                puntaje = verificar_combinacion(lista, coordenada_y, coordenada_x, "piezas")
                 
-                if rect_caramelos.collidepoint(evento.pos):
-                    puntaje = verificar_combinacion(lista, coordenada_x, coordenada_y, "piezas")
-                    
-                    if puntaje == 10:
-                        print("gano 10 puntos")
-                        lista = [
-                            {"piezas":[]},
-                            {"piezas":[]},
-                            {"piezas":[]},
-                            {"piezas":[]}]
-                        generar_matriz(lista, 7)
-                        puntos += 10  
-                    
-                    elif puntaje == -1:
-                        print("siga participando")
-                        lista = [
-                            {"piezas":[]},
-                            {"piezas":[]},
-                            {"piezas":[]},
-                            {"piezas":[]}]
-                        generar_matriz(lista, 7)
-                        segundos_para_jugar = int(segundos_para_jugar) -1 
-                        volumen = volumen - 0.01
-                        sonido_fondo.set_volume(volumen)
-                        puntos -= 1
-            
-                    pygame.display.flip()
+                if puntaje == 10:
+                    print("¡Ganaste 10 puntos!")
+                    lista = [
+                        {"piezas":[]},
+                        {"piezas":[]},
+                        {"piezas":[]},
+                        {"piezas":[]}]
+                    generar_matriz(lista, 7)
+                    puntos += 10
+
+                elif puntaje == -1:
+                    print("Sigue participando")
+                    lista = [
+                        {"piezas":[]},
+                        {"piezas":[]},
+                        {"piezas":[]},
+                        {"piezas":[]}]
+                    generar_matriz(lista, 7)
+                    segundos_para_jugar = int(segundos_para_jugar) - 1
+                    volumen = volumen - 0.01
+                    sonido_fondo.set_volume(volumen)
+                    puntos -= 1
+                pygame.display.flip()
 
             if evento.type == pygame.USEREVENT:
                 if evento.type == cronometro:
@@ -131,7 +133,6 @@ def juego_principal(pantalla):
                         return puntos
 
         pantalla.fill(colores.LIGHTBLUE) # Vuelvo a pintar la pantalla de un color para que no se vean los numeros anteriores
-
         imprimir_caramelos(lista, pantalla, caramelo_azul, caramelo_rojo, caramelo_verde)
         segundos_texto = fuente.render(str(segundos_para_jugar), True, colores.WHITE)
         pantalla.blit(segundos_texto, pos_timer)
