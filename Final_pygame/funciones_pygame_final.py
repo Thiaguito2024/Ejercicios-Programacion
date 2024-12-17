@@ -17,20 +17,10 @@ def generar_csv(nombre_archivo: str, lista: list):
     separados por comas en una sola línea, sin usar map.
     """
     nombre_archivo += ".csv"
-    # puntaje_anterior = []
     contenido = ", ".join(str(elemento) for elemento in lista)
-    
-    try:
-        with open(nombre_archivo, "a") as archivo:
-            archivo.write(contenido + "\n")
-            # puntaje_anterior.append(archivo.readlines())
 
-    except FileNotFoundError:
-        with open(nombre_archivo, "w") as archivo:
+    with open(nombre_archivo, "a") as archivo:
             archivo.write(contenido + "\n")
-            # puntaje_anterior.append(archivo.readlines())
-
-    # return puntaje_anterior
 
 def verificar_combinacion(grilla, fila, columna, clave):
     """
