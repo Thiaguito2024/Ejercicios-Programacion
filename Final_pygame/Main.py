@@ -47,7 +47,9 @@ while running:
                     primer_input = False
 
             if play_rect.collidepoint(evento.pos) and active:
+                lista_jugadores.append(nombre)
                 puntos = juego_principal(pantalla)
+                lista_jugadores.append(puntos)
 
         if evento.type == pygame.KEYDOWN and active:
             if evento.key == pygame.K_BACKSPACE: # Si presiona el DELETE, borra
