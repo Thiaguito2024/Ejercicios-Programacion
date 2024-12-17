@@ -15,7 +15,6 @@ pygame.display.set_icon(icono)
 # Imagenes
 imagen_fondo = pygame.image.load("fondo_candy_3.png")
 imagen_fondo = pygame.transform.scale(imagen_fondo, (800,600))
-imagen_play = pygame.image.load("Fondo_Candy.jpg")
 
 # CONSTANTES
 lista_jugadores = []
@@ -48,7 +47,6 @@ while running:
                     primer_input = False
 
             if play_rect.collidepoint(evento.pos) and active:
-                pantalla.blit(imagen_play, (0,0))
                 puntos = juego_principal(pantalla)
 
         if evento.type == pygame.KEYDOWN and active:
