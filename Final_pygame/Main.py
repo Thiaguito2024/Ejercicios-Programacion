@@ -13,8 +13,9 @@ icono = pygame.image.load("Candy_icono.png")
 pygame.display.set_icon(icono)
 
 # Imagenes
-imagen_fondo = pygame.image.load("fondo_candy_3.png")
-imagen_fondo = pygame.transform.scale(imagen_fondo, (800,600))
+imagen_fondo = cargar_imagen_a_escala("fondo_candy_3.png", (800,600))
+# imagen_fondo = pygame.image.load("fondo_candy_3.png")
+# imagen_fondo = pygame.transform.scale(imagen_fondo, (800,600))
 
 # CONSTANTES
 lista_jugadores = []
@@ -48,7 +49,8 @@ while running:
 
             if play_rect.collidepoint(evento.pos) and active:
                 lista_jugadores.append(nombre)
-                puntos = juego_principal(pantalla)
+                pantalla.blit(imagen_fondo,(0,0))
+                puntos = juego_principal(pantalla, imagen_fondo)
                 lista_jugadores.append(puntos)
 
         if evento.type == pygame.KEYDOWN and active:
@@ -56,7 +58,8 @@ while running:
                 nombre = nombre[:-1]
             elif evento.key == pygame.K_RETURN: #Si presiona enter, arranca el juego de nuevo
                 lista_jugadores.append(nombre)
-                puntos = juego_principal(pantalla)
+                pantalla.blit(imagen_fondo,(0,0))
+                puntos = juego_principal(pantalla, imagen_fondo)
                 lista_jugadores.append(puntos)
             else: # Si presiona cualquier otra letra, se agrega a la cadena 
                 nombre += evento.unicode 

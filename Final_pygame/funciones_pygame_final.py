@@ -39,14 +39,19 @@ def verificar_combinacion(grilla, fila, columna, clave):
 
     return retorno
 
-def juego_principal(pantalla):
+def cargar_imagen_a_escala(nombre:str,escala:list):
+    imagen = pygame.image.load(nombre)
+    imagen = pygame.transform.scale(imagen,(escala))
+    return imagen
+
+def juego_principal(pantalla, imagen_fondo):
     # IMAGENES 
-    caramelo_azul = pygame.image.load("caramelo_azul.png")
-    caramelo_azul = pygame.transform.scale(caramelo_azul,(100,100))
-    caramelo_rojo = pygame.image.load("caramelo_rojo.png")
-    caramelo_rojo = pygame.transform.scale(caramelo_rojo,(100,100))
-    caramelo_verde = pygame.image.load("caramelo_verde.png")
-    caramelo_verde = pygame.transform.scale(caramelo_verde,(100,100))
+    caramelo_azul = cargar_imagen_a_escala("caramelo_azul.png", (100,100))
+    # caramelo_azul = pygame.transform.scale(caramelo_azul,(100,100))
+    caramelo_rojo = cargar_imagen_a_escala("caramelo_rojo.png", (100,100))
+    # caramelo_rojo = pygame.transform.scale(caramelo_rojo,(100,100))
+    caramelo_verde = cargar_imagen_a_escala("caramelo_verde.png", (100,100))
+    # caramelo_verde = pygame.transform.scale(caramelo_verde,(100,100))
     # RECT
     tamaño_celda = 100
     fila = 4
@@ -122,7 +127,8 @@ def juego_principal(pantalla):
                         fin_del_tiempo = True
                         return puntos
 
-        pantalla.fill(colores.LIGHTBLUE) # Vuelvo a pintar la pantalla de un color para que no se vean los numeros anteriores
+        # pantalla.fill(colores.LIGHTBLUE) # Vuelvo a pintar la pantalla de un color para que no se vean los numeros anteriores
+        pantalla.blit(imagen_fondo,(0,0))
         imprimir_caramelos(lista, pantalla, caramelo_azul, caramelo_rojo, caramelo_verde)
         segundos_texto = fuente.render(str(segundos_para_jugar), True, colores.WHITE)
         pantalla.blit(segundos_texto, pos_timer)
