@@ -40,23 +40,20 @@ def verificar_combinacion(grilla, fila, columna, clave):
     return retorno
 
 def cargar_imagen_a_escala(nombre:str,escala:list):
+    """
+    Carga y escala la imagen pasada por parametro
+    """
     imagen = pygame.image.load(nombre)
     imagen = pygame.transform.scale(imagen,(escala))
     return imagen
 
 def juego_principal(pantalla, imagen_fondo):
+
     # IMAGENES 
     caramelo_azul = cargar_imagen_a_escala("caramelo_azul.png", (100,100))
-    # caramelo_azul = pygame.transform.scale(caramelo_azul,(100,100))
     caramelo_rojo = cargar_imagen_a_escala("caramelo_rojo.png", (100,100))
-    # caramelo_rojo = pygame.transform.scale(caramelo_rojo,(100,100))
     caramelo_verde = cargar_imagen_a_escala("caramelo_verde.png", (100,100))
-    # caramelo_verde = pygame.transform.scale(caramelo_verde,(100,100))
-    # RECT
-    tamaño_celda = 100
-    fila = 4
-    columna = 7
-    rect_caramelos = pygame.Rect(fila, columna, tamaño_celda * fila, tamaño_celda * columna)
+
     # TIMER
     puntos = 0
     segundos_para_jugar = "10"
@@ -127,8 +124,7 @@ def juego_principal(pantalla, imagen_fondo):
                         fin_del_tiempo = True
                         return puntos
 
-        # pantalla.fill(colores.LIGHTBLUE) # Vuelvo a pintar la pantalla de un color para que no se vean los numeros anteriores
-        pantalla.blit(imagen_fondo,(0,0))
+        pantalla.blit(imagen_fondo,(0,0)) # Vuelvo a pintar la pantalla de un color para que no se vean los numeros anteriores
         imprimir_caramelos(lista, pantalla, caramelo_azul, caramelo_rojo, caramelo_verde)
         segundos_texto = fuente.render(str(segundos_para_jugar), True, colores.WHITE)
         pantalla.blit(segundos_texto, pos_timer)
@@ -149,13 +145,10 @@ def imprimir_caramelos(lista, screen, caramelo_rojo, caramelo_azul, caramelo_ver
         coordenadas_columna = 50 # Ubicacion de la primera columna
         for caramelo in e_dict["piezas"]:
             if caramelo == 1: 
-                # pygame.draw.rect(screen, colores.BLUE,rect_caramelos)
                 screen.blit(caramelo_rojo, (coordenadas_columna, coordenadas_fila), rect_caramelos)
             elif caramelo == 2:
-                # pygame.draw.rect(screen, colores.BLUE,rect_caramelos)
                 screen.blit(caramelo_azul, (coordenadas_columna, coordenadas_fila), rect_caramelos)
             elif caramelo == 3:
-                # pygame.draw.rect(screen, colores.BLUE,rect_caramelos)
                 screen.blit(caramelo_verde, (coordenadas_columna, coordenadas_fila), rect_caramelos)
             
             coordenadas_columna += 100 # Se le suma 100 a la coordenada para que no esten pegados

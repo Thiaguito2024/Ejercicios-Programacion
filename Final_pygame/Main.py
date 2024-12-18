@@ -14,8 +14,6 @@ pygame.display.set_icon(icono)
 
 # Imagenes
 imagen_fondo = cargar_imagen_a_escala("fondo_candy_3.png", (800,600))
-# imagen_fondo = pygame.image.load("fondo_candy_3.png")
-# imagen_fondo = pygame.transform.scale(imagen_fondo, (800,600))
 
 # CONSTANTES
 lista_jugadores = []
@@ -91,5 +89,3 @@ while running:
 generar_csv("Scoreboard", lista_jugadores)
 print(lista_jugadores)
 pygame.quit()
-
-# AGREGAR QUE EL USUARIO PUEDA MANTENER PRESIONADO EL BOTON DE BORRAR
