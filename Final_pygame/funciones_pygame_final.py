@@ -20,7 +20,39 @@ def generar_csv(nombre_archivo: str, lista: list):
     contenido = ", ".join(str(elemento) for elemento in lista)
 
     with open(nombre_archivo, "a") as archivo:
-            archivo.write(contenido + "\n")
+        archivo.write(contenido + "\n")
+
+def leer_csv(nombre_archivo:str):
+    puntaje_anterior = [] 
+
+    try:
+        with open(nombre_archivo, "r+") as archivo: 
+            for linea in archivo:
+                puntaje_anterior.append(linea.strip()) # El strip por defecto elimina los saltos de linea \n
+
+    except FileNotFoundError:
+        pass
+        
+    return puntaje_anterior            
+
+def swap(lista,i,j)->list:
+    """
+    Hace el swap de la lista pasada por parametros, espera la lista, la posicion i y la poscion j
+    """
+    aux = lista[i]
+    lista[i] = lista[j]
+    lista[j] = aux
+
+def ordenamiento(lista:list, orden:int):
+    """
+    Realiza el ordenamiento de la lista pasada por parametro 
+    """
+    for i in range(len(lista)-1):
+        for j in range(i+1, len(lista)):
+            if orden == 1 and lista[i][0] > lista[j][0]:
+                swap(lista,i,j)
+            if orden == -1 and lista[i] < lista[j]:
+                swap(lista,i,j)
 
 def verificar_combinacion(grilla, fila, columna, clave):
     """
@@ -59,10 +91,12 @@ def juego_principal(pantalla, imagen_fondo):
     segundos_para_jugar = "10"
     pos_timer = (100, 100)
     # SONIDO 
+
     pygame.mixer.init()
     sonido_fondo = pygame.mixer.Sound("y2mate.mp3")
     volumen = 0.10
     sonido_fondo.set_volume(volumen)
+    
     # CONSTANTES
     fuente = pygame.font.SysFont("Arial", 50)
     fin_del_tiempo = False

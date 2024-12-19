@@ -17,7 +17,9 @@ imagen_fondo = cargar_imagen_a_escala("fondo_candy_3.png", (800,600))
 
 # CONSTANTES
 lista_jugadores = []
+puntajes = leer_csv("Scoreboard.csv")
 fuente = pygame.font.SysFont(None, 36)
+fuente_scoreboard = pygame.font.SysFont(None, 30)
 play_rect = pygame.Rect(300,300,300,75)
 input_rect = pygame.Rect(300,400,400,75)
 scoreboard_rect = pygame.Rect(0,200,250,400)
@@ -59,7 +61,7 @@ while running:
                 pantalla.blit(imagen_fondo,(0,0))
                 puntos = juego_principal(pantalla, imagen_fondo)
                 lista_jugadores.append(puntos)
-            else: # Si presiona cualquier otra letra, se agrega a la cadena 
+            else: # Si presiona cualquier otro caraceter o numero, se agrega a la cadena 
                 nombre += evento.unicode 
     
     # Dibujo en la pantalla
@@ -80,9 +82,15 @@ while running:
     pantalla.blit(scoreboard_texto, (scoreboard_rect.x + 15, scoreboard_rect.y + 15))
 
     # Scoreboard
+    # ordenamiento(lista_jugadores, 1)
+
     espacio = 30
+    for puntaje in puntajes:
+        pantalla.blit(fuente_scoreboard.render(f"{puntaje}", True, colores.WHITE),(scoreboard_rect.x +15, scoreboard_rect.y+espacio + 15)) # Bliteo nombre y puntos
+        espacio += 30 
+
     for persona in lista_jugadores:
-        pantalla.blit(fuente.render(f"{persona}", True, colores.WHITE),(scoreboard_rect.x +15, scoreboard_rect.y+espacio+15)) # Bliteo nombre y puntos
+        pantalla.blit(fuente_scoreboard.render(f"{persona}", True, colores.WHITE),(scoreboard_rect.x +15, scoreboard_rect.y+espacio + 15)) # Bliteo nombre y puntos
         espacio += 30 
 
     pygame.display.flip()
