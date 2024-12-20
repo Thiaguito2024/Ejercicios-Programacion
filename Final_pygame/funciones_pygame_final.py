@@ -47,15 +47,13 @@ def ordenamiento(lista: list, orden: int):
     """
     Realiza el ordenamiento de la lista pasada por parámetro.
     """
-    for i in range(len(lista) - 1):  # Controla la posición base
-        for j in range(i + 1, len(lista)):  # Compara los elementos subsiguientes
-            # Orden ascendente por el primer elemento (alfabéticamente)
+    for i in range(len(lista)-1):
+        for j in range(i+1, len(lista)):
             if orden == 1 and lista[i] > lista[j]:
-                swap(lista, i, j)
-
-            # Orden descendente considerando la lista completa
+                swap(lista,i,j)
             if orden == -1 and lista[i] < lista[j]:
-                swap(lista, i, j)
+                swap(lista,i,j)
+
 def verificar_combinacion(grilla, fila, columna, clave):
     """
     Verifica si dos filas para abajo o para arriba hay dos caramelos iguales
