@@ -1,4 +1,5 @@
-from funciones import swap
+from Paquetes.funciones import swap
+from copy import deepcopy
 import json
 
 def menu():
@@ -18,21 +19,18 @@ def leer_json(nombre_archivo:str):
 
 #2
 def ordenamiento_diccionarios(lista:list, clave:str, orden:int):
-    lista_heroe = []
-    for i in range(len(lista)-1):
-        for j in range(i+1, len(lista)):
-            if orden == 1 and lista[i][clave] > lista[j][clave]:
+    lista_heroe = deepcopy(lista)
+    for i in range(len(lista_heroe)-1):
+        for j in range(i+1, len(lista_heroe)):
+            if orden == 1 and lista_heroe[i][clave] > lista_heroe[j][clave]:
                 swap(lista,i,j)
-            elif orden == -1 and lista[i][clave] < lista[j][clave]:
+            elif orden == -1 and lista_heroe[i][clave] < lista_heroe[j][clave]:
                 swap(lista,i,j)
-    for elemento in lista:
-        lista_heroe.append(elemento)
-        
-    for i in (lista_heroe):
-        print(i)
-    
+    return lista_heroe
+
 #3
 def generar_csv(nombre_archivo:str, lista:list):
+    nombre_archivo += ".csv"
     with open(nombre_archivo, "w") as archivo:
         for e_tema in lista:
             linea = "{0},{1},{2},{3},{4},{5},{6},{7},{8},{9}"
@@ -47,4 +45,4 @@ def generar_csv(nombre_archivo:str, lista:list):
                         e_tema["color_pelo"],
                         e_tema["fuerza"],
                         e_tema["inteligencia"])
-            archivo.write(linea)
+            archivo.write(linea + "\n")
