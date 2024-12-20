@@ -98,14 +98,14 @@ def juego_principal(pantalla, imagen_fondo):
                 fin_del_tiempo = True
             
             if evento.type == pygame.MOUSEBUTTONDOWN:
-                print("click", evento.pos)
+                # print("click", evento.pos)
                 coordenada_x = (evento.pos[0] - 50) // 100  # Restamos margen izquierdo
                 coordenada_y = (evento.pos[1] - 150) // 100  # Restamos margen superior
-                print("x", coordenada_x, "y", coordenada_y)
+                # print("x", coordenada_x, "y", coordenada_y)
                 puntaje = verificar_combinacion(lista, coordenada_y, coordenada_x, "piezas")
                 
                 if puntaje == 10:
-                    print("¡Ganaste 10 puntos!")
+                    # print("¡Ganaste 10 puntos!")
                     lista = [
                         {"piezas":[]},
                         {"piezas":[]},
@@ -115,7 +115,7 @@ def juego_principal(pantalla, imagen_fondo):
                     puntos += 10
 
                 elif puntaje == -1:
-                    print("Sigue participando")
+                    # print("Sigue participando")
                     lista = [
                         {"piezas":[]},
                         {"piezas":[]},
