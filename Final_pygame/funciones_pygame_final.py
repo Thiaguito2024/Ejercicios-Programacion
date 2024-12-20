@@ -18,7 +18,7 @@ def generar_csv(nombre_archivo: str, lista: list):
     """
     nombre_archivo += ".csv"
     contenido = ", ".join(str(elemento) for elemento in lista)
-
+    
     with open(nombre_archivo, "a") as archivo:
         archivo.write(contenido + "\n")
 
@@ -34,25 +34,6 @@ def leer_csv(nombre_archivo:str):
         pass
         
     return puntaje_anterior            
-
-def swap(lista,i,j)->list:
-    """
-    Hace el swap de la lista pasada por parametros, espera la lista, la posicion i y la poscion j
-    """
-    aux = lista[i]
-    lista[i] = lista[j]
-    lista[j] = aux
-
-def ordenamiento(lista: list, orden: int):
-    """
-    Realiza el ordenamiento de la lista pasada por parámetro.
-    """
-    for i in range(len(lista)-1):
-        for j in range(i+1, len(lista)):
-            if orden == 1 and lista[i] > lista[j]:
-                swap(lista,i,j)
-            if orden == -1 and lista[i] < lista[j]:
-                swap(lista,i,j)
 
 def verificar_combinacion(grilla, fila, columna, clave):
     """

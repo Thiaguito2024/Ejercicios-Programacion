@@ -49,7 +49,6 @@ while running:
 
             if play_rect.collidepoint(evento.pos) and active:
                 lista_jugadores.append(nombre)
-                pantalla.blit(imagen_fondo,(0,0))
                 puntos = juego_principal(pantalla, imagen_fondo)
                 lista_jugadores.append(puntos)
 
@@ -58,12 +57,11 @@ while running:
                 nombre = nombre[:-1]
             elif evento.key == pygame.K_RETURN: #Si presiona enter, arranca el juego de nuevo
                 lista_jugadores.append(nombre)
-                pantalla.blit(imagen_fondo,(0,0))
                 puntos = juego_principal(pantalla, imagen_fondo)
                 lista_jugadores.append(puntos)
             else: # Si presiona cualquier otro caraceter o numero, se agrega a la cadena 
-                nombre += evento.unicode 
-    
+                nombre += evento.unicode  
+        
     # Dibujo en la pantalla
     pantalla.blit(imagen_fondo,(0,0))
     color_input = scoreboard_activo if active else scoreboard_inactivo
@@ -82,17 +80,16 @@ while running:
     pantalla.blit(scoreboard_texto, (scoreboard_rect.x + 15, scoreboard_rect.y + 15))
 
     # Scoreboard
-    # ordenamiento(lista_jugadores, 1)
     espacio = 30
+    
     for puntaje in puntajes:
         pantalla.blit(fuente_scoreboard.render(f"{puntaje}", True, colores.WHITE),(scoreboard_rect.x +15, scoreboard_rect.y+espacio + 15)) # Bliteo nombre y puntos
-        espacio += 30 
+        espacio += 30 # Para mover el siguiente jugador más abajo en el scoreboard
 
-    for persona in lista_jugadores:
-        pantalla.blit(fuente_scoreboard.render(f"{persona}", True, colores.WHITE),(scoreboard_rect.x +15, scoreboard_rect.y+espacio + 15)) # Bliteo nombre y puntos
-        espacio += 30 
-
+    for jugador in lista_jugadores:
+        pantalla.blit(fuente_scoreboard.render(f"{jugador}", True, colores.WHITE),(scoreboard_rect.x +15, scoreboard_rect.y+espacio + 15)) # Bliteo nombre y puntos
+        espacio += 30  # Para mover el siguiente jugador más abajo en el scoreboard
     pygame.display.flip()
-generar_csv("Scoreboard", lista_jugadores)
-print(lista_jugadores)
+
+generar_csv("Scoreboard", lista_jugadores) # Se guarda afuera pq al estar en el modo append, lo agrega vuelta a vuelta
 pygame.quit()
