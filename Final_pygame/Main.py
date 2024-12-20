@@ -83,7 +83,7 @@ while running:
     espacio = 30
     
     for puntaje in puntajes:
-        pantalla.blit(fuente_scoreboard.render(f"{puntaje}", True, colores.WHITE),(scoreboard_rect.x +15, scoreboard_rect.y+espacio + 15)) # Bliteo nombre y puntos
+        pantalla.blit(fuente_scoreboard.render(f"{puntaje}", True, colores.WHITE),(scoreboard_rect.x +15, scoreboard_rect.y+espacio + 15)) # Bliteo el historial de nombre y puntos
         espacio += 30 # Para mover el siguiente jugador más abajo en el scoreboard
 
     for jugador in lista_jugadores:
